@@ -24,16 +24,12 @@ const App = () => {
   }, []);
 
   const handleSurahPress = async (surahId) => {
-    if (expandedSurah === surahId) {
     
-      setExpandedSurah(null);
-      setLastReadSurah(null);
-    } else {
       // Fetch the Surah content if it is a new Surah
       const response = await fetch(`https://api.alquran.cloud/v1/surah/${surahId}/en.asad`);
       const result = await response.json();
       setExpandedSurah(surahId); 
-      setExpandedContent(result.data);
+      setExpandedContent(result.data); 
       setLastReadSurah(result.data); // Update last read Surah
       await AsyncStorage.setItem('lastReadSurah', JSON.stringify(result.data)); // Store last read Surah in Async Storage
     }
@@ -80,7 +76,7 @@ const App = () => {
                   </View>
                 </TouchableOpacity>
 
-                {/* Display selected Surah content if this Surah is expanded */}
+                {/* Display selected Surah content directly below if this Surah is expanded */}
                 {expandedSurah === item.number && expandedContent && (
                   <View style={styles.selectedSurahContainer}>
                     <Text style={styles.selectedSurahTitle}>{expandedContent.name}</Text>
@@ -154,14 +150,14 @@ const styles = StyleSheet.create({
   item: {
     padding: 15,
     backgroundColor: '#fff',
-    borderRadius: 8, // Match the card style
+    borderRadius: 8, 
     marginVertical: 5,
     elevation: 2,
   },
   itemTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#000', // Set text color
+    color: '#000', 
   },
   itemDetails: {
     fontSize: 14,
@@ -175,7 +171,7 @@ const styles = StyleSheet.create({
   selectedSurahContainer: {
     marginTop: 10,
     padding: 10,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f0f0f0', 
     borderRadius: 8,
     elevation: 2,
   },
